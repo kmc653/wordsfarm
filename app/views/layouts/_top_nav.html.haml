@@ -1,0 +1,13 @@
+= link_to "Home", root_path
+
+
+- if !logged_in?
+  |
+  = link_to "Register", register_path
+  |
+  = link_to "Login", login_path
+- if logged_in?
+  |
+  Welcome, #{current_user.full_name}
+  |
+  =link_to "Logout", logout_path
