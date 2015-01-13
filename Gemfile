@@ -13,6 +13,7 @@ group :development, :test do
   gem 'pry-nav'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'letter_opener'
 end
 
 group :test do
