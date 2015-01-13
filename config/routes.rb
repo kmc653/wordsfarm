@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:create, :show]
   resources :vocabularies, only: [:new, :create, :destroy, :edit, :update]
+  resources :queue_items, only: [:create, :destroy]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

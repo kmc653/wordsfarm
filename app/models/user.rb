@@ -4,4 +4,9 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :vocabularies
+  has_many :queue_items
+
+  def queued_word?(word)
+    queue_items.map(&:vocabulary).include?(word)
+  end
 end
