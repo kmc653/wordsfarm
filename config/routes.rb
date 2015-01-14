@@ -8,10 +8,15 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
+  get 'forgot_password', to: 'forgot_passwords#new'
+  get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
+  get 'expired_token', to: 'password_resets#expired_token'
 
   resources :users, only: [:create, :show]
   resources :vocabularies, only: [:new, :create, :destroy, :edit, :update]
   resources :queue_items, only: [:create, :destroy]
+  resources :forgot_passwords, only: [:create]
+  resources :password_resets, only: [:show, :create]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

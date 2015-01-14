@@ -6,7 +6,13 @@ class User < ActiveRecord::Base
   has_many :vocabularies
   has_many :queue_items
 
+  before_create :generate_token
+
   def queued_word?(word)
     queue_items.map(&:vocabulary).include?(word)
+  end
+
+  def generate_token
+    self.token = SecureRandom.urlsafe_base64
   end
 end

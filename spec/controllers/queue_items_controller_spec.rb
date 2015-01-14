@@ -12,7 +12,7 @@ describe QueueItemsController do
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: ellie)
       post :create, user_id: kevin.id, vocabulary_id: word.id
-      expect(response).to redirect_to user_path(kevin)
+      expect(response).to redirect_to user_path(ellie)
     end
 
     it "create a queue item" do
