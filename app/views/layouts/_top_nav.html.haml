@@ -11,6 +11,10 @@
   %img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(current_user.email.downcase)}?s=30")
   = link_to current_user.full_name, user_path(current_user)
   |
+  = link_to "People", people_path
+  |
   = link_to "Add New Word", new_vocabulary_path
+  |
+  = link_to "Invite a Friend", new_invitation_path
   |
   =link_to "Logout", logout_path

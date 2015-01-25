@@ -1,59 +1,64 @@
-%header
-  //%img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email.downcase)}?s=40")
-  %h2 #{@user.full_name}'s word collections (#{@user.vocabularies.count})
-  ew Word
-  //= link_to "Follow", relationships_path(leader_id: @user.id), class: "btn btn-default", method: :post if current_user.can_follow?(@user)
-%table.table
-  %thead
-    %tr
-      %th(width="5%")
-      %th(width="15%") Word
-      %th(width="15%") Part of Speech
-      %th(width="30%") Example
-  %tbody
-    - @user.vocabularies.each_with_index do |vocabulary, index|
-      %tr
-        %td
-          = index + 1
-        %td
-          = vocabulary.word
-        %td
-          = vocabulary.part_of_speech
-        %td
-          = vocabulary.example
-        %td
-          - if vocabulary.creator == current_user
-            = link_to edit_vocabulary_path(vocabulary) do
-              %i.glyphicon.glyphicon-edit 
-            = link_to vocabulary, method: :delete do
-              %i.glyphicon.glyphicon-trash
-          - else
-            = link_to "+ My Queue", queue_items_path(vocabulary_id: vocabulary.id), method: :post, class: 'btn btn-default' unless current_user.queued_word?(vocabulary)
+%section.user.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %article
+        %header
+          //%img(src="http://www.gravatar.com/avatar/#{Digest::MD5.hexdigest(@user.email.downcase)}?s=40")
+          %h2 #{@user.full_name}'s word collections (#{@user.vocabularies.count})
+          = link_to "Follow", relationships_path(leader_id: @user.id), class: 'btn btn-success', method: :post if current_user.can_follow?(@user)
+          //= link_to "Follow", relationships_path(leader_id: @user.id), class: "btn btn-default", method: :post if current_user.can_follow?(@user)
+        %table.table
+          - if @user.vocabularies.count != 0
+            %thead
+              %tr
+                %th(width="5%")
+                %th(width="15%") Word
+                %th(width="15%") Part of Speech
+                %th(width="30%") Example
+            %tbody
+              - @user.vocabularies.each_with_index do |vocabulary, index|
+                %tr
+                  %td
+                    = index + 1
+                  %td
+                    = vocabulary.word
+                  %td
+                    = vocabulary.part_of_speech
+                  %td
+                    = vocabulary.example
+                  %td
+                    - if vocabulary.creator == current_user
+                      = link_to edit_vocabulary_path(vocabulary) do
+                        %i.glyphicon.glyphicon-edit 
+                      = link_to vocabulary, method: :delete do
+                        %i.glyphicon.glyphicon-trash
+                    - else
+                      = link_to "+ My Queue", queue_items_path(vocabulary_id: vocabulary.id), method: :post, class: 'btn btn-default' unless current_user.queued_word?(vocabulary)
 
-%table.table
-  %h2 Added From Other Users (#{@user.queue_items.count})
-  - if @user.queue_items.count != 0
-    %thead
-      %tr
-        %th(width="5%")
-        %th(width="15%") Word
-        %th(width="15%") Part of Speech
-        %th(width="30%") Example
-        %th(width="15%") From
-    %tbody
-      - @user.queue_items.each_with_index do |item, index|
-        %tr
-          %td
-            = index + 1
-          %td
-            = item.vocabulary_word
-          %td
-            = item.vocabulary_part_of_speech
-          %td
-            = item.vocabulary_example
-          %td
-            = item.vocabulary_creator.full_name
-          %td
-            - if item.user == current_user
-              = link_to item, method: :delete do
-                %i.glyphicon.glyphicon-remove
+        %table.table
+          %h2 Added From Other Users (#{@user.queue_items.count})
+          - if @user.queue_items.count != 0
+            %thead
+              %tr
+                %th(width="5%")
+                %th(width="15%") Word
+                %th(width="15%") Part of Speech
+                %th(width="30%") Example
+                %th(width="15%") From
+            %tbody
+              - @user.queue_items.each_with_index do |item, index|
+                %tr
+                  %td
+                    = index + 1
+                  %td
+                    = item.vocabulary_word
+                  %td
+                    = item.vocabulary_part_of_speech
+                  %td
+                    = item.vocabulary_example
+                  %td
+                    = item.vocabulary_creator.full_name
+                  %td
+                    - if item.user == current_user
+                      = link_to item, method: :delete do
+                        %i.glyphicon.glyphicon-remove

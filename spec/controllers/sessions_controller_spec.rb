@@ -8,9 +8,10 @@ describe SessionsController do
     end
     
     it "redirect to root page for authenticated user" do
-      session[:user_id] = Fabricate(:user).id
+      kevin = Fabricate(:user)
+      set_current_user(kevin)
       get :new
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to user_path(kevin)
     end
   end
 
@@ -22,10 +23,10 @@ describe SessionsController do
         expect(session[:user_id]).to eq(kevin.id)
       end
       
-      it "redirect to root page" do
+      it "redirect to user page" do
         kevin = Fabricate(:user)
         post :create, email: kevin.email, password: kevin.password
-        expect(response).to redirect_to(root_path)
+        expect(response).to redirect_to(user_path(kevin))
       end
       
       it "sets the notice" do

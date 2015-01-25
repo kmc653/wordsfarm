@@ -26,8 +26,32 @@ describe UsersController do
         expect(User.count).to eq(1)
       end
       
-      it "redirect to the home page" do
-        expect(response).to redirect_to root_path
+      it "redirect to the user page" do
+        expect(response).to redirect_to user_path(User.first)
+      end
+
+      it "make the user follow the inviter" do
+        kevin = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: kevin, recipient_email: 'ellie@example.com', recipient_name: 'Ellie Lai')
+        post :create, user: { email: 'ellie@example.com', password: 'password', full_name: 'Ellie Lai' }, invitation_token: invitation.token
+        ellie = User.where(email: 'ellie@example.com').first
+        expect(ellie.follow?(kevin)).to be_truthy
+      end
+
+      it "make inviter follow the user" do
+        kevin = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: kevin, recipient_email: 'ellie@example.com', recipient_name: 'Ellie Lai')
+        post :create, user: { email: 'ellie@example.com', password: 'password', full_name: 'Ellie Lai' }, invitation_token: invitation.token
+        ellie = User.where(email: 'ellie@example.com').first
+        expect(kevin.follow?(ellie)).to be_truthy
+      end
+
+      it "expired the invitation upon acceptance" do
+        kevin = Fabricate(:user)
+        invitation = Fabricate(:invitation, inviter: kevin, recipient_email: 'ellie@example.com', recipient_name: 'Ellie Lai')
+        post :create, user: { email: 'ellie@example.com', password: 'password', full_name: 'Ellie Lai' }, invitation_token: invitation.token
+        ellie = User.where(email: 'ellie@example.com').first
+        expect(Invitation.first.token).to be_nil
       end
     end
 
