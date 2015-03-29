@@ -1,8 +1,8 @@
 = render 'shared/header', header: 'Login'
 
-= form_tag '/login', method: 'post', class: "form-horizontal" do
+= form_tag sessions_path, class: "form-horizontal" do
   .form-group
-    = label_tag "Email Address", nil, class: "col-sm-2 control-label"
+    = label_tag :email, 'Email Address', class: "col-sm-2 control-label"
     .col-sm-6
       = text_field_tag :email, params[:email], class: "form-control"
   .form-group
@@ -11,5 +11,5 @@
       = password_field_tag :password, nil, class: "form-control"
   .form-group
     .col-sm-offset-2.col-sm-10
-      = submit_tag "login", class: "btn btn-primary"
+      = submit_tag "Login", class: "btn btn-primary"
       = link_to "Forgot Password?", forgot_password_path

@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   #add token following with register for click invitation mail's link
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
   get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
   get '/logout', to: 'sessions#destroy'
   get 'forgot_password', to: 'forgot_passwords#new'
   get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
@@ -22,6 +21,7 @@ Rails.application.routes.draw do
   resources :password_resets, only: [:show, :create]
   resources :invitations, only: [:new, :create]
   resources :relationships, only: [:create, :destroy]
+  resources :sessions, only: [:create]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

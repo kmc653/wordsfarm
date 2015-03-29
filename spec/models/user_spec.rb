@@ -7,8 +7,7 @@ describe User do
   it { should validate_uniqueness_of(:email) }
   it { should have_many(:vocabularies) }
 
-  it "generates a random token when the user is created" do
-    kevin = Fabricate(:user)
-    expect(kevin.token).to be_present
+  it_behaves_like "tokenable" do
+    let(:object) { Fabricate(:user) }
   end
 end
