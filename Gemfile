@@ -7,6 +7,8 @@ gem 'faker'
 gem 'bootstrap_form'
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'sidekiq'
+gem 'unicorn'
 
 group :development, :test do
   gem 'pry'
