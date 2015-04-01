@@ -9,6 +9,8 @@ gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
 gem 'sidekiq'
 gem 'unicorn'
+gem 'stripe'
+gem 'figaro'
 
 group :development, :test do
   gem 'pry'

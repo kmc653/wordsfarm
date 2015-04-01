@@ -18,3 +18,32 @@
   = link_to "Invite a Friend", new_invitation_path
   |
   =link_to "Logout", logout_path
+  |
+  <script src="https://checkout.stripe.com/checkout.js"></script>
+
+  <button id="customButton">Donate</button>
+
+  :javascript
+    var handler = StripeCheckout.configure({
+      key: '#{ENV['STRIPE_PUBLISHABLE_KEY']}',
+      image: '/img/documentation/checkout/marketplace.png',
+      token: function(token) {
+        // Use the token to create the charge with a server-side script.
+        // You can access the token ID with `token.id`
+      }
+    });
+
+    $('#customButton').on('click', function(e) {
+      // Open Checkout with further options
+      handler.open({
+        name: 'wordsfarm.com',
+        description: 'user donation',
+        amount: 500
+      });
+      e.preventDefault();
+    });
+
+    // Close Checkout on page navigation
+    $(window).on('popstate', function() {
+      handler.close();
+    });
