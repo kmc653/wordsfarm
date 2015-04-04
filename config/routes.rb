@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :invitations, only: [:new, :create]
   resources :relationships, only: [:create, :destroy]
   resources :sessions, only: [:create]
+  resources :categories, only: [:new, :create, :show]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

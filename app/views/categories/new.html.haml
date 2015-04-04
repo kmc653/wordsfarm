@@ -1,0 +1,9 @@
+= render 'shared/header', header: 'Create a New Category'
+%br
+= bootstrap_form_for(@category, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-6") do |f|
+  %div
+    = f.text_field :name, label: "Category's Name"
+  %br
+  %div.actions.control-group.col-sm-offset-2
+    .controls
+      %input(type="submit" value="Create" class="btn btn-primary")
