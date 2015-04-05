@@ -40,6 +40,6 @@ class VocabulariesController < ApplicationController
   private
 
   def voca_params
-    params.require(:vocabulary).permit(:word, :part_of_speech, :example)
+    params.require(:vocabulary).permit(:word, :part_of_speech, :example, :category_id)
   end
 end

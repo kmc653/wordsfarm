@@ -7,10 +7,14 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<header>
-  <%= render 'layouts/top_nav' %>
-</header>
-<%= yield %>
-  
+  <header>
+    <%= render 'layouts/top_nav' %>
+  </header>
+  <section class="content clearfix">
+    <%= render 'shared/messages' %>
+    <%= yield %>
+  </section>
+  <footer>
+  </footer>
 </body>
 </html>

@@ -1,11 +1,14 @@
 = render 'shared/header', header: "Edit '#{@vocabulary.word}'"
 
+
 = bootstrap_form_for(@vocabulary, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-6") do |f|
   %div
     = f.text_field :word, label: "Word"
     = f.select :part_of_speech, [["Noun"], ["Verb"], ["Adverb"], ["Adjective"], ["Preposition"], ["Conjunction"]], {label: "Part of Speech"}, {class: "selectpicker"}
     = f.text_field :example, label: "Example"
+    - cate_array = current_user.categories.all.map { |category| [category.name, category.id] }
+    = f.select :category_id, options_for_select(cate_array, @vocabulary.category_id), include_blank: " "
   %br
   %div.actions.control-group.col-sm-offset-2
-    %input(type="submit" value="Edit" class="btn btn-success") 
-    = button_to "Cancel", user_path(current_user), :method => "get"
+    %input(type="submit" value="Edit" class="btn btn-success")
+    = link_to "Cancel", user_path(current_user)
