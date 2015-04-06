@@ -18,7 +18,10 @@ class VocabulariesController < ApplicationController
 
   def destroy
     word = Vocabulary.find(params[:id])
-    word.destroy if current_user.vocabularies.include?(word)
+    if current_user.vocabularies.include?(word)
+      word.destroy 
+      QueueItem.destroy_all(vocabulary_id: params[:id])
+    end
     redirect_to user_path(current_user)
   end
 

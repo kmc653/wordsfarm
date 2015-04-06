@@ -7,13 +7,11 @@
         %thead
           %tr
             %th(width="30%") Category's name
-            %th(width="20%") Words
-            %th(width="20%") Followers
-            %th(width="30%") Unfollow
+            %th(width="30%") Words
         %tbody
           - @categories.each do |category|
             %tr
               %td= category.name
-              %td.extra-padding
+              %td= category.vocabularies.count
               %td.extra-padding
               %td.extra-padding

@@ -23,6 +23,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @category_id = params[:user][:categories].to_i if params[:user]
     @user = User.find(params[:id])
   end
 

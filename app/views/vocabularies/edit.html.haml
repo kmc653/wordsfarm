@@ -6,8 +6,7 @@
     = f.text_field :word, label: "Word"
     = f.select :part_of_speech, [["Noun"], ["Verb"], ["Adverb"], ["Adjective"], ["Preposition"], ["Conjunction"]], {label: "Part of Speech"}, {class: "selectpicker"}
     = f.text_field :example, label: "Example"
-    - cate_array = current_user.categories.all.map { |category| [category.name, category.id] }
-    = f.select :category_id, options_for_select(cate_array, @vocabulary.category_id), include_blank: " "
+    = f.select :category_id, options_for_select(collect_categories_array, @vocabulary.category_id), include_blank: " "
   %br
   %div.actions.control-group.col-sm-offset-2
     %input(type="submit" value="Edit" class="btn btn-success")
