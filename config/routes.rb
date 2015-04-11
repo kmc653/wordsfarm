@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
   get 'expired_token', to: 'password_resets#expired_token'
   get 'people', to: 'relationships#index'
+  get 'search', to: 'add_searched_words#search'
+  post 'search', to: 'add_searched_words#search'
 
   resources :users, only: [:create, :show]
   resources :vocabularies, only: [:new, :create, :destroy, :edit, :update]
@@ -23,6 +25,7 @@ Rails.application.routes.draw do
   resources :relationships, only: [:create, :destroy]
   resources :sessions, only: [:create]
   resources :categories, only: [:new, :create, :show]
+  resources :add_searched_words, only: [:show, :create]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

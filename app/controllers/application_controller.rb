@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
   def logged_in?
     !!current_user
   end
+
+  def create_url(word, api_key)
+    url = word + '?key=' + api_key
+  end
 end
