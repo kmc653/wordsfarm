@@ -11,6 +11,7 @@ gem 'sidekiq'
 gem 'unicorn'
 gem 'stripe'
 gem 'figaro'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'pry'

@@ -4,6 +4,9 @@ require 'rails/all'
 require 'net/http'
 require 'active_support/core_ext/hash'
 require 'uri'
+require 'nokogiri'
+require 'open-uri'
+
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

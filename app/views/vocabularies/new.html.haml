@@ -3,7 +3,7 @@
 = bootstrap_form_for(@vocabulary, layout: :horizontal, label_col: "col-sm-2", control_col: "col-sm-6") do |f|
   %div
     = f.text_field :word, label: "Word"
-    = f.select :part_of_speech, [["Noun"], ["Verb"], ["Adverb"], ["Adjective"], ["Preposition"], ["Conjunction"]], {label: "Part of Speech"}, {class: "selectpicker"}
+    = f.select :part_of_speech, [["noun"], ["verb"], ["adverb"], ["adjective"], ["preposition"], ["conjunction"]], {label: "Part of Speech"}, {class: "selectpicker"}
     = f.text_field :example, label: "Example"
     = f.select :category_id, options_from_collection_for_select(current_user.categories.all, :id, :name), include_blank: " "
   %br

@@ -8,5 +8,36 @@
   %fieldset.form-group.action
     = submit_tag 'Search'
 
+- if @word
+  - item = 0
+  - vi_count = 0
+  %div
+    %p= @word
+    - @pos.each do |pos|
+      %p= pos.text
+    / - @degree.each do |degree|
+    /   %span= degree.text() + " "
+    
+    %p= "Definition of #{@word}:"
+    - @dt = @entry_def.css("sn")
+    - @dt.take(3).each do |sn|
+      %span= sn.text() + " "
+      - if @entry_def.css("dt")[item]
+        %p= @entry_def.css("dt")[item].text()
+        - item += 1
 
-%div= @hash
+    %p= "Example"
+    %ul
+      - @vi.take(3).each do |ex|
+        %li= ex.text
+
+    - @vocabulary = Vocabulary.new
+    - @vocabulary.word = @word
+    - @vocabulary.part_of_speech = @pos[0].text
+    - @vocabulary.example = @vi[0].text
+
+    = form_for @vocabulary, url: vocabularies_path, method: :post do |f|
+      = hidden_field(:vocabulary, :word)
+      = hidden_field(:vocabulary, :part_of_speech)
+      = hidden_field(:vocabulary, :example)
+      %input(type="submit" value="Add" class="btn btn-primary")
