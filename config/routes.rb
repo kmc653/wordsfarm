@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resources :categories, only: [:new, :create, :show]
   resources :add_searched_words, only: [:show, :create]
+  resources :donations, only: [:new, :create]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

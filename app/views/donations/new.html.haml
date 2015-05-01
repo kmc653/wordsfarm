@@ -1,0 +1,24 @@
+= content_for :head do
+  %script(type="text/javascript" src="https://js.stripe.com/v2/")
+  :javascript
+    Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
+  = javascript_include_tag 'payments'
+
+= render 'shared/header', header: "Donation"
+
+%h4 Please make a donation with your credit card.
+= form_tag donations_path, id: 'payment-form' do
+  %fieldset.credit_card
+    %span.payment-errors
+    .control-group
+      %label Credit Card Number
+      %input.span3.card-number(type="text" data-stripe="number")
+    .control-group
+      %label Security Code
+      %input.span3.card-cvc(type="text" data-stripe="cvc")
+    .control-group
+      %label Expiration
+      = select_month(Date.today, {add_month_numbers: true}, name: nil, data: {stripe: "exp-month"}, class: 'span2 card-expiry-month')
+      = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, data: {stripe: "exp-year"}, class: 'span1 card-expiry-year')
+  %fieldset.actions
+    = submit_tag "Donate", class: "btn btn-default"
