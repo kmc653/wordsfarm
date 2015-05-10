@@ -2,12 +2,7 @@ jQuery(function($) {
   $('#payment-form').submit(function(event) {
     var $form = $(this);
     $form.find('button').prop('disabled', true);
-    Stripe.card.createToken({
-      number: $('.card-number').val(),
-      cvc: $('.card-cvc').val(),
-      exp_month: $('.card-expiry-month').val(),
-      exp_year: $('.card-expiry-year').val()
-    }, stripeResponseHandler);
+    Stripe.card.createToken($form, stripeResponseHandler);
     // Prevent the form from submitting with the default action
     return false;
   });

@@ -1,0 +1,211 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/tokens
+    body:
+      encoding: US-ASCII
+      string: card[number]=4242424242424242&card[exp_month]=3&card[exp_year]=2017&card[cvc]=314
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.20.4
+      Authorization:
+      - Bearer sk_test_9SZCzWtrn9rSdujINLt8Urum
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.20.4","lang":"ruby","lang_version":"2.1.2 p95 (2014-05-08)","platform":"x86_64-darwin13.0","publisher":"stripe","uname":"Darwin
+        Kai-Min-Changteki-MacBook-Pro.local 12.5.0 Darwin Kernel Version 12.5.0: Sun
+        Sep 29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64"}'
+      Content-Length:
+      - '81'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 09 May 2015 08:44:13 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '747'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_UtjC5WZ4hMjcQG6f
+      Stripe-Version:
+      - '2015-02-18'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "tok_160TZBE7JwniA027LR6jq3pb",
+          "livemode": false,
+          "created": 1431161053,
+          "used": false,
+          "object": "token",
+          "type": "card",
+          "card": {
+            "id": "card_160TZBE7JwniA027tJWfDtVa",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 3,
+            "exp_year": 2017,
+            "fingerprint": "VBjjFK12L1YtJfTB",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "unchecked",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "dynamic_last4": null,
+            "metadata": {}
+          },
+          "client_ip": "36.236.154.65"
+        }
+    http_version: 
+  recorded_at: Sat, 09 May 2015 08:44:13 GMT
+- request:
+    method: post
+    uri: https://api.stripe.com/v1/charges
+    body:
+      encoding: US-ASCII
+      string: amount=500&currency=usd&source=tok_160TZBE7JwniA027LR6jq3pb
+    headers:
+      Accept:
+      - "*/*; q=0.5, application/xml"
+      Accept-Encoding:
+      - gzip, deflate
+      User-Agent:
+      - Stripe/v1 RubyBindings/1.20.4
+      Authorization:
+      - Bearer sk_test_9SZCzWtrn9rSdujINLt8Urum
+      Content-Type:
+      - application/x-www-form-urlencoded
+      X-Stripe-Client-User-Agent:
+      - '{"bindings_version":"1.20.4","lang":"ruby","lang_version":"2.1.2 p95 (2014-05-08)","platform":"x86_64-darwin13.0","publisher":"stripe","uname":"Darwin
+        Kai-Min-Changteki-MacBook-Pro.local 12.5.0 Darwin Kernel Version 12.5.0: Sun
+        Sep 29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64"}'
+      Content-Length:
+      - '59'
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx
+      Date:
+      - Sat, 09 May 2015 08:44:14 GMT
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1367'
+      Connection:
+      - keep-alive
+      Access-Control-Allow-Credentials:
+      - 'true'
+      Access-Control-Allow-Methods:
+      - GET, POST, HEAD, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - "*"
+      Access-Control-Max-Age:
+      - '300'
+      Cache-Control:
+      - no-cache, no-store
+      Request-Id:
+      - req_F99J4E28Ron4Hl56
+      Stripe-Version:
+      - '2015-02-18'
+      Strict-Transport-Security:
+      - max-age=31556926; includeSubDomains
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "id": "ch_160TZCE7JwniA027XqcPP9LK",
+          "object": "charge",
+          "created": 1431161054,
+          "livemode": false,
+          "paid": true,
+          "status": "succeeded",
+          "amount": 500,
+          "currency": "usd",
+          "refunded": false,
+          "source": {
+            "id": "card_160TZBE7JwniA027tJWfDtVa",
+            "object": "card",
+            "last4": "4242",
+            "brand": "Visa",
+            "funding": "credit",
+            "exp_month": 3,
+            "exp_year": 2017,
+            "fingerprint": "VBjjFK12L1YtJfTB",
+            "country": "US",
+            "name": null,
+            "address_line1": null,
+            "address_line2": null,
+            "address_city": null,
+            "address_state": null,
+            "address_zip": null,
+            "address_country": null,
+            "cvc_check": "pass",
+            "address_line1_check": null,
+            "address_zip_check": null,
+            "dynamic_last4": null,
+            "metadata": {},
+            "customer": null
+          },
+          "captured": true,
+          "balance_transaction": "txn_160TZCE7JwniA027pHkOnJ1w",
+          "failure_message": null,
+          "failure_code": null,
+          "amount_refunded": 0,
+          "customer": null,
+          "invoice": null,
+          "description": null,
+          "dispute": null,
+          "metadata": {},
+          "statement_descriptor": null,
+          "fraud_details": {},
+          "receipt_email": null,
+          "receipt_number": null,
+          "shipping": null,
+          "application_fee": null,
+          "refunds": {
+            "object": "list",
+            "total_count": 0,
+            "has_more": false,
+            "url": "/v1/charges/ch_160TZCE7JwniA027XqcPP9LK/refunds",
+            "data": []
+          }
+        }
+    http_version: 
+  recorded_at: Sat, 09 May 2015 08:44:14 GMT
+recorded_with: VCR 2.9.3

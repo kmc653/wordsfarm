@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get 'people', to: 'relationships#index'
   get 'search', to: 'add_searched_words#search'
   post 'search', to: 'add_searched_words#search'
+  get 'donate', to: 'donations#new'
 
   resources :users, only: [:create, :show]
   resources :vocabularies, only: [:new, :create, :destroy, :edit, :update]
@@ -26,7 +27,7 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resources :categories, only: [:new, :create, :show]
   resources :add_searched_words, only: [:show, :create]
-  resources :donations, only: [:new, :create]
+  resources :donations, only: [:create]
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

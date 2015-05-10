@@ -12,13 +12,13 @@
     %span.payment-errors
     .control-group
       %label Credit Card Number
-      %input.span3.card-number(type="text" data-stripe="number")
+      %input.span3.card-number#card-number(type="text" data-stripe="number")
     .control-group
       %label Security Code
-      %input.span3.card-cvc(type="text" data-stripe="cvc")
+      %input.span3.card-cvc#security-code(type="text" data-stripe="cvc")
     .control-group
       %label Expiration
-      = select_month(Date.today, {add_month_numbers: true}, name: nil, data: {stripe: "exp-month"}, class: 'span2 card-expiry-month')
-      = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, data: {stripe: "exp-year"}, class: 'span1 card-expiry-year')
+      = select_month(Date.today, {add_month_numbers: true}, name: nil, data: {stripe: "exp-month"}, class: 'card-expiry-month')
+      = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, data: {stripe: "exp-year"}, class: 'card-expiry-year')
   %fieldset.actions
-    = submit_tag "Donate", class: "btn btn-default"
+    = submit_tag "Submit Payment", class: "btn btn-default"

@@ -1,20 +1,23 @@
 class DonationsController < ApplicationController
+  before_action :require_user
+
+  def new
+  end
+  
   def create
     @user = current_user
-    Stripe.api_key = ENV['STRIPE_SECRET_KEY']
     token = params[:stripeToken]
-    begin
-      Stripe::Charge.create(
-        :amount => 500,
-        :currency => "usd",
-        :source => token,
-        :description => "Donation from #{@user.email}."
-      )
+
+    charge = StripeWrapper::Charge.create( 
+      :source => token, 
+      :description => "Donation from #{@user.email}."
+    )
+    if charge.successful?
       flash[:success] = "Thank you for your generous support!"
-      redirect_to new_donation_path
-    rescue Stripe::CardError => e
-      flash[:errors] = e.message
-      redirect_to new_donation_path
+      redirect_to donate_path
+    else
+      flash[:errors] = charge.error_message
+      redirect_to donate_path
     end
   end
 end
