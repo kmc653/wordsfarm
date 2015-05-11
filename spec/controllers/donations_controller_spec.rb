@@ -36,7 +36,7 @@ describe DonationsController do
       end
 
       it "sets the flash error message" do
-        flash[:errors].should == 'Your card was declined'
+        flash[:error].should == 'Your card was declined'
       end
       it "redirects to the new dnation page" do
         response.should redirect_to donate_path

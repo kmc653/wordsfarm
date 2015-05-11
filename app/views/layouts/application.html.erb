@@ -12,7 +12,7 @@
     <%= render 'layouts/top_nav' %>
   </header>
   <section class="content clearfix">
-    <%= render 'shared/messages' %>
+    <%= render partial: 'shared/messages', flash: flash %>
     <%= yield %>
   </section>
   <footer>

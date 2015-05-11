@@ -16,7 +16,7 @@ class DonationsController < ApplicationController
       flash[:success] = "Thank you for your generous support!"
       redirect_to donate_path
     else
-      flash[:errors] = charge.error_message
+      flash[:error] = charge.error_message
       redirect_to donate_path
     end
   end
