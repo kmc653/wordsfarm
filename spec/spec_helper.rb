@@ -7,6 +7,8 @@ require 'sidekiq/testing'
 require 'vcr'
 Sidekiq::Testing.inline!
 
+Capybara.javascript_driver = :webkit
+
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -76,7 +78,7 @@ RSpec.configure do |config|
   end
 
   config.before(:each) do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = :transaction
   end
 
   config.before(:each, :js => true) do

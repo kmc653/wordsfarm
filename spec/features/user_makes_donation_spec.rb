@@ -11,16 +11,18 @@ feature 'User makes donation', js: true do
   scenario "valid card number" do
     pay_with_credit_card('4242424242424242')
 
-    expect(page).to have_content("Thank you for your generous support!")
+    page.should have_content("Thank you for your generous support!")
   end
+  
   scenario "invalid card number" do
     pay_with_credit_card('4000000000000069')
 
     expect(page).to have_content("Your card has expired.")
   end
+  
   scenario "declined card" do
     pay_with_credit_card('4000000000000002')
-    
+
     expect(page).to have_content("Your card was declined.")
   end
 
