@@ -1,8 +1,5 @@
 class DonationsController < ApplicationController
   before_action :require_user
-
-  def new
-  end
   
   def create
     @user = current_user
