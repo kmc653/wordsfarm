@@ -1,12 +1,9 @@
 = render 'shared/header', header: "I'm searching for..."
 
 = form_tag do
-  %fieldset.form-group
-    .row
-      .col-sm-4
-        = text_field_tag :word
-  %fieldset.form-group.action
-    = submit_tag 'Search'
+  = text_field_tag :word
+  = button_tag(type: 'submit', class: "btn btn-default") do
+    %span.glyphicon.glyphicon-search
 
 - if @word
   - item = 0

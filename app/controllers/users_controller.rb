@@ -15,7 +15,7 @@ class UsersController < ApplicationController
       handle_invitation
       AppMailer.send_welcome_email(@user).deliver
       session[:user_id] = @user.id
-      flash[:notice] = "You are registered."
+      flash[:success] = "You are registered."
       redirect_to user_path(@user)
     else
       render :new

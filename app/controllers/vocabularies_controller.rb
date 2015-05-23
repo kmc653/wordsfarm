@@ -9,7 +9,7 @@ class VocabulariesController < ApplicationController
     @vocabulary = Vocabulary.new(voca_params)
     @vocabulary.creator = current_user
     if @vocabulary.save
-      flash[:notice] = "You've added a new word."
+      flash[:success] = "You've added a new word."
       redirect_to user_path(current_user)
     else
       render :new
@@ -32,7 +32,7 @@ class VocabulariesController < ApplicationController
   def update
     @vocabulary = Vocabulary.find(params[:id])
     if @vocabulary.update(voca_params)
-      flash[:notice] = "edit successfully!"
+      flash[:success] = "edit successfully!"
       redirect_to user_path(current_user)
     else
       flash[:error] = "There are something wrong with your update."

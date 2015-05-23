@@ -5,7 +5,7 @@ feature 'User makes donation', js: true do
   before do
     kevin = Fabricate(:user)
     register(kevin)
-    click_button 'Donate'
+    click_link 'Donate'
   end
 
   scenario "valid card number" do

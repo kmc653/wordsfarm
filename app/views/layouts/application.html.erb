@@ -8,15 +8,57 @@
   <%= yield :head%>
 </head>
 <body>
-  <header>
-    <%= render 'layouts/top_nav' %>
-  </header>
-  <section class="content clearfix">
-    <%= render partial: 'shared/messages', flash: flash %>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <%= link_to 'WordsFarm', root_path, class: 'navbar-brand' %>
+      </div>
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <% if logged_in? %>
+            <li><%= link_to "Home", user_path(current_user) %></li>
+            <li><%= link_to "People", people_path %></li>
+            <li><%= link_to "Categories", category_path(current_user.id) %></li>
+            <li><%= link_to "Search", search_path %></li>
+            <li><%= link_to "Donate", donate_path, method: :get %></li>
+            <% else %>
+            <li><%= link_to "Register", register_path %></li>
+            <li><%= link_to "Login", login_path %></li>
+          <% end %>
+        </ul>
+        <% if logged_in? %>
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                <%= current_user.full_name %>
+                <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu" role="menu">
+                <li>
+                  <%= link_to "Add New Word", new_vocabulary_path %>
+                  <%= link_to "Create New Category", new_category_path %>
+                  <%= link_to "Invite a Friend", new_invitation_path %>
+                  <%= link_to "Logout", logout_path %>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        <% end %>
+      </div>
+    </div>
+  </nav>
+  <div class="container">
+    <%= render 'shared/messages' %>
     <%= yield %>
-  </section>
+  </div>
   <footer>
-    &copy 2015 WordsFarm
   </footer>
 </body>
 </html>

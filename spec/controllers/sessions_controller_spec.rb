@@ -32,7 +32,7 @@ describe SessionsController do
       it "sets the notice" do
         kevin = Fabricate(:user)
         post :create, email: kevin.email, password: kevin.password
-        expect(flash[:notice]).not_to be_blank
+        expect(flash[:success]).not_to be_blank
       end
     end
 
@@ -73,7 +73,7 @@ describe SessionsController do
     end
     
     it "set the notice" do
-      expect(flash[:notice]).not_to be_blank
+      expect(flash[:success]).not_to be_blank
     end
   end
 end
