@@ -12,7 +12,7 @@ describe QueueItemsController do
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: ellie)
       post :create, user_id: kevin.id, vocabulary_id: word.id
-      expect(response).to redirect_to user_path(ellie)
+      expect(response).to redirect_to sort_by_created_date_path(ellie)
     end
 
     it "create a queue item" do
@@ -63,7 +63,7 @@ describe QueueItemsController do
       set_current_user(kevin)
       queue_item = Fabricate(:queue_item)
       delete :destroy, id: queue_item.id
-      expect(response).to redirect_to user_path(kevin)
+      expect(response).to redirect_to sort_by_created_date_path(kevin)
     end
 
     it "delete the item" do

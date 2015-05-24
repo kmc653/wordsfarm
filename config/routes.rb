@@ -16,8 +16,10 @@ Rails.application.routes.draw do
   get 'search', to: 'add_searched_words#search'
   post 'search', to: 'add_searched_words#search'
   get 'donate', to: 'donations#new'
+  get 'users/:id/sort_by_created_date', to: 'users#sort_by_created_date', as: 'sort_by_created_date'
+  get 'users/:id/sort_by_category', to: 'users#sort_by_category', as: 'sort_by_category'
 
-  resources :users, only: [:create, :show]
+  resources :users, only: [:create]
   resources :vocabularies, only: [:new, :create, :destroy, :edit, :update]
   resources :queue_items, only: [:create, :destroy]
   resources :forgot_passwords, only: [:create]

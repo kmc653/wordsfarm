@@ -16,13 +16,17 @@ class UsersController < ApplicationController
       AppMailer.send_welcome_email(@user).deliver
       session[:user_id] = @user.id
       flash[:success] = "You are registered."
-      redirect_to user_path(@user)
+      redirect_to sort_by_created_date_path(@user)
     else
       render :new
     end
   end
 
-  def show
+  def sort_by_created_date
+    @user = User.find(params[:id])
+  end
+
+  def sort_by_category
     @category_id = params[:user][:categories].to_i if params[:user]
     @user = User.find(params[:id])
   end

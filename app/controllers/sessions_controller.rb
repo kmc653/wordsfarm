@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
   def new
-    redirect_to user_path(current_user) if current_user
+    redirect_to sort_by_created_date_path(current_user) if current_user
   end
 
   def create
@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Welcome, you're logged in!"
-      redirect_to user_path(user)
+      redirect_to sort_by_created_date_path(user)
     else
       flash[:error] = "Invalid email or password."
       redirect_to login_path

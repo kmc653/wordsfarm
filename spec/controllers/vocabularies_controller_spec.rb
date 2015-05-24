@@ -35,7 +35,7 @@ describe VocabulariesController do
           kevin = Fabricate(:user)
           session[:user_id] = kevin.id
           post :create, vocabulary: Fabricate.attributes_for(:vocabulary), user_id: kevin.id
-          expect(response).to redirect_to kevin
+          expect(response).to redirect_to sort_by_created_date_path(kevin)
         end
 
         it "create a word associated with the login user" do
@@ -65,7 +65,7 @@ describe VocabulariesController do
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: kevin)
       delete :destroy, id: word.id
-      expect(response).to redirect_to user_path(kevin)
+      expect(response).to redirect_to sort_by_created_date_path(kevin)
     end
 
     it "delete the word" do
@@ -114,7 +114,7 @@ describe VocabulariesController do
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: kevin)
       patch :update, id: word.id, vocabulary: { word: 'word', part_of_speech: 'verb', example: '12345' }
-      expect(response).to redirect_to user_path(kevin)
+      expect(response).to redirect_to sort_by_created_date_path(kevin)
     end
 
     it "flash error if edit does not finish" do

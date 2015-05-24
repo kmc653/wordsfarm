@@ -5,18 +5,25 @@
         %header
           %h2 #{@user.full_name}'s word collections (#{@user.vocabularies.count})
           = link_to "Follow", relationships_path(leader_id: @user.id), class: 'btn btn-success', method: :post if current_user.can_follow?(@user)
-          = form_for @user, url: user_path(@user), method: :get do |f|
-            = f.select :categories, collect_categories_array.unshift('All'), label: "Choose one of the categories:"
-            = f.submit "Go", class: "btn btn-success"
+        %ul.nav.nav-tabs
+          %li{:role => "presentation"}
+            = link_to "Sorted by created date", sort_by_created_date_path(@user)
+          %li.active{:role => "presentation"}
+            = link_to "Sorted by category", sort_by_category_path(@user)
+        %br
+        = form_for @user, url: sort_by_category_path(@user), method: :get do |f|
+          = f.select :categories, collect_categories_array.unshift('All'), label: "Choose one of the categories:"
+          = f.submit "Go", class: "btn btn-success"
         %table.table
-          - if @user.vocabularies.count != 0
+          - if @user.have_vocabularies?
             %thead
               %tr
-                %th(width="5%")
+                %th(width="5%")  
                 %th(width="15%") Word
                 %th(width="15%") Part of Speech
                 %th(width="15%") Category
-                %th(width="40%") Example
+                %th(width="15%") Created_at
+                %th(width="35%") Example
             %tbody
               - if @category_id && @category_id > 0
                 - @user.vocabularies.where(category_id: @category_id).each_with_index do |vocabulary, index|
@@ -29,6 +36,8 @@
                       = vocabulary.part_of_speech
                     %td
                       = has_no_category?(vocabulary)
+                    %td
+                      = vocabulary.created_at.to_date
                     %td
                       = vocabulary.example
                     %td
@@ -50,6 +59,8 @@
                       = vocabulary.part_of_speech
                     %td
                       = has_no_category?(vocabulary)
+                    %td
+                      = vocabulary.created_at.to_date
                     %td
                       = vocabulary.example
                     %td

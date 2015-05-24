@@ -11,7 +11,7 @@ describe SessionsController do
       kevin = Fabricate(:user)
       set_current_user(kevin)
       get :new
-      expect(response).to redirect_to user_path(kevin)
+      expect(response).to redirect_to sort_by_created_date_path(kevin)
     end
   end
 
@@ -26,7 +26,7 @@ describe SessionsController do
       it "redirect to user page" do
         kevin = Fabricate(:user)
         post :create, email: kevin.email, password: kevin.password
-        expect(response).to redirect_to(user_path(kevin))
+        expect(response).to redirect_to(sort_by_created_date_path(kevin))
       end
       
       it "sets the notice" do

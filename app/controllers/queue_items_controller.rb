@@ -4,13 +4,13 @@ class QueueItemsController < ApplicationController
   def create
     word = Vocabulary.find(params[:vocabulary_id])
     queue_word(word)
-    redirect_to user_path(word.creator)
+    redirect_to sort_by_created_date_path(word.creator)
   end
 
   def destroy
     item = QueueItem.find(params[:id])
     item.destroy if current_user.queue_items.include?(item)
-    redirect_to user_path(current_user)
+    redirect_to sort_by_created_date_path(current_user)
   end
 
 

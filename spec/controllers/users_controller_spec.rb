@@ -27,7 +27,7 @@ describe UsersController do
       end
       
       it "redirect to the user page" do
-        expect(response).to redirect_to user_path(User.first)
+        expect(response).to redirect_to sort_by_created_date_path(User.first)
       end
 
       it "make the user follow the inviter" do

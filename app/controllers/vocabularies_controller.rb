@@ -10,7 +10,7 @@ class VocabulariesController < ApplicationController
     @vocabulary.creator = current_user
     if @vocabulary.save
       flash[:success] = "You've added a new word."
-      redirect_to user_path(current_user)
+      redirect_to sort_by_created_date_path(current_user)
     else
       render :new
     end
@@ -22,7 +22,7 @@ class VocabulariesController < ApplicationController
       word.destroy 
       QueueItem.destroy_all(vocabulary_id: params[:id])
     end
-    redirect_to user_path(current_user)
+    redirect_to sort_by_created_date_path(current_user)
   end
 
   def edit
@@ -33,7 +33,7 @@ class VocabulariesController < ApplicationController
     @vocabulary = Vocabulary.find(params[:id])
     if @vocabulary.update(voca_params)
       flash[:success] = "edit successfully!"
-      redirect_to user_path(current_user)
+      redirect_to sort_by_created_date_path(current_user)
     else
       flash[:error] = "There are something wrong with your update."
       render :edit
