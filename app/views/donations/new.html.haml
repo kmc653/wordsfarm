@@ -4,21 +4,35 @@
     Stripe.setPublishableKey("#{ENV['STRIPE_PUBLISHABLE_KEY']}");
   = javascript_include_tag 'payments'
 
-= render 'shared/header', header: "Donation"
-
-%h4 Please make a donation with your credit card.
-= form_tag donations_path, id: 'payment-form' do
-  %fieldset.credit_card
-    %span.payment-errors
-    .control-group
-      %label Credit Card Number
-      %input.span3.card-number#card-number(type="text" data-stripe="number")
-    .control-group
-      %label Security Code
-      %input.span3.card-cvc#security-code(type="text" data-stripe="cvc")
-    .control-group
-      %label Expiration
-      = select_month(Date.today, {add_month_numbers: true}, name: nil, data: {stripe: "exp-month"}, class: 'card-expiry-month')
-      = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, data: {stripe: "exp-year"}, class: 'card-expiry-year')
-  %fieldset.actions
-    = submit_tag "Submit Payment", class: "btn btn-default"
+.container
+  .row
+    .span12
+      = form_tag donations_path, id: 'payment-form', class: 'form-horizontal span6' do
+        %fieldset.credit_card
+          %span.payment-errors
+          %legend Donation
+          %label.control-label Card Holder's Name
+          .controls
+            %input.input-block-level{:pattern => "\\w+ \\w+.*", :required => "", :title => "Fill your first and last name", :type => "text"}
+          .control-group
+            %label.control-label Card Number
+            .controls
+              .row-fluid
+                .span3
+                  %input.span3.card-number#card-number(type="text" data-stripe="number")
+          .control-group
+            %label.control-label Card CVV
+            .controls
+              .row-fluid
+                .span3
+                  %input.span3.card-cvc#security-code(type="text" data-stripe="cvc")
+          .control-group
+            %label.control-label Card Expiry Date
+            .controls
+              .row-fluid
+                .span9
+                  = select_month(Date.today, {add_month_numbers: true}, name: nil, data: {stripe: "exp-month"}, class: 'card-expiry-month')
+                  = select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 4}, name: nil, data: {stripe: "exp-year"}, class: 'card-expiry-year')
+          %br
+          .form-actions
+            = submit_tag "Submit Payment", class: "btn btn-default"

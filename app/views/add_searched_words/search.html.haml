@@ -1,9 +1,9 @@
 = render 'shared/header', header: "I'm searching for..."
 
-= form_tag do
-  = text_field_tag :word
-  = button_tag(type: 'submit', class: "btn btn-default") do
-    %span.glyphicon.glyphicon-search
+/ = form_tag do
+/   = text_field_tag :word
+/   = button_tag(type: 'submit', class: "btn btn-default") do
+/     %span.glyphicon.glyphicon-search
 
 - if @word
   - item = 0
