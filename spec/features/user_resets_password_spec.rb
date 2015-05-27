@@ -17,7 +17,7 @@ feature 'User resets password' do
     fill_in "Email Address", with: kevin.email
     fill_in "Password", with: "new_password"
     click_button "Login"
-    expect(page).to have_content("#{kevin.full_name}'s word collections")
+    expect(page).to have_content("#{kevin.full_name}'s 單字集")
 
     clear_email
   end

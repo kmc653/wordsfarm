@@ -3,44 +3,44 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %h2 #{@user.full_name}'s word collections (#{@user.vocabularies.count})
-          = link_to "Follow", relationships_path(leader_id: @user.id), class: 'btn btn-success', method: :post if current_user.can_follow?(@user)
+          %h2 #{@user.full_name}'s 單字集 (#{@user.vocabularies.count})
+          = link_to "關注 Follow", relationships_path(leader_id: @user.id), class: 'btn btn-success', method: :post if current_user.can_follow?(@user)
         %ul.nav.nav-tabs
           %li.active{:role => "presentation"}
-            = link_to "Sorted by created date", sort_by_created_date_path(@user)
+            = link_to "依日期 Sorted by created date", sort_by_created_date_path(@user)
           %li{:role => "presentation"}
-            = link_to "Sorted by category", sort_by_category_path(@user)
+            = link_to "依分類 Sorted by category", sort_by_category_path(@user)
         %br
         %table.table
           - if @user.have_vocabularies?
-            %thead
-              - @user.collect_words_created_at_date.each do |date|
+            - collect_created_at_date(@user.vocabularies).each do |date|
+              %thead
                 %tr
                   %th(width="15%") #{date}
                   %th(width="5%")  #
-                  %th(width="15%") Word
-                  %th(width="15%") Part of Speech
-                  %th(width="35%") Example     
-                %tbody
-                  - @user.find_all_words_with_specific_date(date).each_with_index do |vocabulary, index|
-                    %tr
-                      %td
-                      %td
-                        = index + 1
-                      %td
-                        = vocabulary.word
-                      %td
-                        = vocabulary.part_of_speech
-                      %td
-                        = vocabulary.example
-                      %td
-                        - if vocabulary.creator == current_user
-                          = link_to edit_vocabulary_path(vocabulary) do
-                            %i.glyphicon.glyphicon-edit 
-                          = link_to vocabulary, method: :delete do
-                            %i.glyphicon.glyphicon-trash
-                        - else
-                          = link_to "+ My Queue", queue_items_path(vocabulary_id: vocabulary.id), method: :post, class: 'btn btn-default' unless current_user.queued_word?(vocabulary)
+                  %th(width="15%") 單字
+                  %th(width="15%") 詞性
+                  %th(width="35%") 例句     
+              %tbody
+                - find_all_words_with_specific_date(@user.vocabularies, date).each_with_index do |vocabulary, index|
+                  %tr
+                    %td
+                    %td
+                      = index + 1
+                    %td
+                      = vocabulary.word
+                    %td
+                      = vocabulary.part_of_speech
+                    %td
+                      = vocabulary.example
+                    %td
+                      - if vocabulary.creator == current_user
+                        = link_to edit_vocabulary_path(vocabulary) do
+                          %i.glyphicon.glyphicon-edit 
+                        = link_to vocabulary, method: :delete do
+                          %i.glyphicon.glyphicon-trash
+                      - else
+                        = link_to "+ My Queue", queue_items_path(vocabulary_id: vocabulary.id), method: :post, class: 'btn btn-default' unless current_user.queued_word?(vocabulary)
 
         /   = form_for @user, url: user_path(@user), method: :get do |f|
         /     = f.select :categories, collect_categories_array.unshift('All'), label: "Choose one of the categories:"
@@ -104,30 +104,33 @@
         /               - else
         /                 = link_to "+ My Queue", queue_items_path(vocabulary_id: vocabulary.id), method: :post, class: 'btn btn-default' unless current_user.queued_word?(vocabulary)
 
-        / %table.table
-        /   %h2 Added From Other Users (#{@user.queue_items.count})
-        /   - if @user.queue_items.count != 0
-        /     %thead
-        /       %tr
-        /         %th(width="5%")
-        /         %th(width="15%") Word
-        /         %th(width="15%") Part of Speech
-        /         %th(width="30%") Example
-        /         %th(width="15%") From
-        /     %tbody
-        /       - @user.queue_items.each_with_index do |item, index|
-        /         %tr
-        /           %td
-        /             = index + 1
-        /           %td
-        /             = item.vocabulary_word
-        /           %td
-        /             = item.vocabulary_part_of_speech
-        /           %td
-        /             = item.vocabulary_example
-        /           %td
-        /             = item.vocabulary_creator.full_name
-        /           %td
-        /             - if item.user == current_user
-        /               = link_to item, method: :delete do
-        /                 %i.glyphicon.glyphicon-remove
+        %table.table
+          %h2 Added From Other Users (#{@user.queue_items.count})
+          - if @user.queue_items.count != 0
+            - collect_created_at_date(@user.queue_items).each do |date|                   
+              %thead
+                %tr
+                  %th(width="15%") #{date}
+                  %th(width="5%")  #
+                  %th(width="15%") 單字
+                  %th(width="15%") 詞性
+                  %th(width="35%") 例句
+                  %th(width="15%") 來源
+              %tbody
+                - find_all_words_with_specific_date(@user.queue_items, date).each_with_index do |item, index|
+                  %tr
+                    %td
+                    %td
+                      = index + 1
+                    %td
+                      = item.vocabulary_word
+                    %td
+                      = item.vocabulary_part_of_speech
+                    %td
+                      = item.vocabulary_example
+                    %td
+                      = item.vocabulary_creator.full_name
+                    %td
+                      - if item.user == current_user
+                        = link_to item, method: :delete do
+                          %i.glyphicon.glyphicon-remove

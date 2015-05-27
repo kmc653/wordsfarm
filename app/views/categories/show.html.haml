@@ -2,12 +2,12 @@
   .row
     .col-sm-10.col-sm-offset-1
       %header
-        %h2 Category
+        %h2 分類
       %table.table
         %thead
           %tr
-            %th(width="30%") Category's name
-            %th(width="30%") Words
+            %th(width="30%") 分類名稱
+            %th(width="30%") 單字數量
         %tbody
           - @categories.each do |category|
             %tr

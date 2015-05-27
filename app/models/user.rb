@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_secure_password
 
   has_many :vocabularies, -> { order("created_at DESC") }
-  has_many :queue_items
+  has_many :queue_items, -> { order("created_at DESC") }
   has_many :categories
 
   has_many :following_relationships, class_name: 'Relationship', foreign_key: :follower_id
@@ -30,22 +30,5 @@ class User < ActiveRecord::Base
 
   def have_vocabularies?
     self.vocabularies.count != 0
-  end
-
-  def collect_words_created_at_date
-    array = Array.new
-    self.vocabularies.each do |vocabulary|
-      date = vocabulary.created_at.to_date.to_s
-      array.push(date)
-    end
-    array = array.uniq
-  end
-
-  def find_all_words_with_specific_date(date)
-    word_array = Array.new
-    self.vocabularies.each do |word|
-      word_array.push(word) if word.created_at.to_date.to_s == date
-    end
-    word_array
   end
 end

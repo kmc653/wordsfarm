@@ -32,13 +32,13 @@ feature 'User invites friend' do
   end
 
   def friend_should_follow(user)
-    click_link 'People'
+    click_link '朋友'
     page.should have_content user.full_name
   end
 
   def inviter_should_follow_friend(inviter)
     login(inviter)
-    click_link 'People'
+    click_link '朋友'
     page.should have_content "Kevin Chang"
   end
 end

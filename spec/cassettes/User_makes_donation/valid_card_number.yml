@@ -1,42 +1,11 @@
 ---
 http_interactions:
 - request:
-    method: get
-    uri: http://127.0.0.1:62810/__identify__
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      Accept-Encoding:
-      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
-      Accept:
-      - "*/*"
-      User-Agent:
-      - Ruby
-  response:
-    status:
-      code: 200
-      message: 'OK '
-    headers:
-      Server:
-      - WEBrick/1.3.1 (Ruby/2.1.2/2014-05-08)
-      Date:
-      - Sun, 17 May 2015 05:43:34 GMT
-      Content-Length:
-      - '14'
-      Connection:
-      - Keep-Alive
-    body:
-      encoding: UTF-8
-      string: '70246759264540'
-    http_version: 
-  recorded_at: Sun, 17 May 2015 05:43:34 GMT
-- request:
     method: post
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=500&currency=usd&source=tok_163KYhE7JwniA02723NU00Xi&description=Donation%20from%20justine%40kemmer.com.
+      string: amount=500&currency=usd&source=tok_166mbwE7JwniA027pXKYfyct&description=Donation%20from%20gerald%40wehner.com.
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -53,7 +22,7 @@ http_interactions:
         Kai-Min-Changteki-MacBook-Pro.local 12.5.0 Darwin Kernel Version 12.5.0: Sun
         Sep 29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64"}'
       Content-Length:
-      - '111'
+      - '110'
   response:
     status:
       code: 200
@@ -62,11 +31,11 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 17 May 2015 05:43:33 GMT
+      - Tue, 26 May 2015 18:17:10 GMT
       Content-Type:
       - application/json
       Content-Length:
-      - '1421'
+      - '1420'
       Connection:
       - keep-alive
       Access-Control-Allow-Credentials:
@@ -80,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_RL4cOWmkuzd5vGZ5
+      - req_4FvEITa8O8OwEwU7
       Stripe-Version:
       - '2015-02-18'
       Strict-Transport-Security:
@@ -89,9 +58,9 @@ http_interactions:
       encoding: UTF-8
       string: |
         {
-          "id": "ch_163KYjE7JwniA027EQadpFsa",
+          "id": "ch_166mbyE7JwniA027rWyq3PQ8",
           "object": "charge",
-          "created": 1431841413,
+          "created": 1432664230,
           "livemode": false,
           "paid": true,
           "status": "succeeded",
@@ -99,7 +68,7 @@ http_interactions:
           "currency": "usd",
           "refunded": false,
           "source": {
-            "id": "card_163KYhE7JwniA027LdHaepGR",
+            "id": "card_166mbwE7JwniA027vJeVMF5U",
             "object": "card",
             "last4": "4242",
             "brand": "Visa",
@@ -123,13 +92,13 @@ http_interactions:
             "customer": null
           },
           "captured": true,
-          "balance_transaction": "txn_163KYjE7JwniA027Icj5eqFh",
+          "balance_transaction": "txn_166mbyE7JwniA027TaFXUXRa",
           "failure_message": null,
           "failure_code": null,
           "amount_refunded": 0,
           "customer": null,
           "invoice": null,
-          "description": "Donation from justine@kemmer.com.",
+          "description": "Donation from gerald@wehner.com.",
           "dispute": null,
           "metadata": {},
           "statement_descriptor": null,
@@ -143,10 +112,10 @@ http_interactions:
             "object": "list",
             "total_count": 0,
             "has_more": false,
-            "url": "/v1/charges/ch_163KYjE7JwniA027EQadpFsa/refunds",
+            "url": "/v1/charges/ch_166mbyE7JwniA027rWyq3PQ8/refunds",
             "data": []
           }
         }
     http_version: 
-  recorded_at: Sun, 17 May 2015 05:43:38 GMT
+  recorded_at: Tue, 26 May 2015 18:17:11 GMT
 recorded_with: VCR 2.9.3

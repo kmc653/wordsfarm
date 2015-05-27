@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-feature 'User makes donation', js: true do
+feature 'User makes donation', { js: true, vcr: true } do
   
   before do
     kevin = Fabricate(:user)
-    register(kevin)
-    click_link 'Donate'
+    login(kevin)
+    click_link "捐款"
   end
 
   scenario "valid card number" do

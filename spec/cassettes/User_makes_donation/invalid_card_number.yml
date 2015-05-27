@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.stripe.com/v1/charges
     body:
       encoding: US-ASCII
-      string: amount=500&currency=usd&source=tok_163KYlE7JwniA027zyI2BYDP&description=Donation%20from%20serena%40bauch.name.
+      string: amount=500&currency=usd&source=tok_166mbzE7JwniA027yINN9tfS&description=Donation%20from%20isabell_monahan%40satterfield.net.
     headers:
       Accept:
       - "*/*; q=0.5, application/xml"
@@ -22,7 +22,7 @@ http_interactions:
         Kai-Min-Changteki-MacBook-Pro.local 12.5.0 Darwin Kernel Version 12.5.0: Sun
         Sep 29 13:33:47 PDT 2013; root:xnu-2050.48.12~1/RELEASE_X86_64 x86_64"}'
       Content-Length:
-      - '110'
+      - '124'
   response:
     status:
       code: 402
@@ -31,7 +31,7 @@ http_interactions:
       Server:
       - nginx
       Date:
-      - Sun, 17 May 2015 05:43:36 GMT
+      - Tue, 26 May 2015 18:17:12 GMT
       Content-Type:
       - application/json
       Content-Length:
@@ -49,7 +49,7 @@ http_interactions:
       Cache-Control:
       - no-cache, no-store
       Request-Id:
-      - req_N2mdWD8Ok0v0NcXX
+      - req_2uBBDrP3UuoXlagB
       Stripe-Version:
       - '2015-02-18'
     body:
@@ -61,9 +61,9 @@ http_interactions:
             "type": "card_error",
             "param": "exp_month",
             "code": "expired_card",
-            "charge": "ch_163KYmE7JwniA027A0gUgyFb"
+            "charge": "ch_166mc0E7JwniA027XF1SD1vO"
           }
         }
     http_version: 
-  recorded_at: Sun, 17 May 2015 05:43:41 GMT
+  recorded_at: Tue, 26 May 2015 18:17:13 GMT
 recorded_with: VCR 2.9.3

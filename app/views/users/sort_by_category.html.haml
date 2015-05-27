@@ -3,7 +3,7 @@
     .col-sm-10.col-sm-offset-1
       %article
         %header
-          %h2 #{@user.full_name}'s word collections (#{@user.vocabularies.count})
+          %h2 #{@user.full_name}'s 單字集 (#{@user.vocabularies.count})
           = link_to "Follow", relationships_path(leader_id: @user.id), class: 'btn btn-success', method: :post if current_user.can_follow?(@user)
         %ul.nav.nav-tabs
           %li{:role => "presentation"}
@@ -19,11 +19,10 @@
             %thead
               %tr
                 %th(width="5%")  
-                %th(width="15%") Word
-                %th(width="15%") Part of Speech
-                %th(width="15%") Category
-                %th(width="15%") Created_at
-                %th(width="35%") Example
+                %th(width="15%") 單字
+                %th(width="15%") 詞性
+                %th(width="15%") 分類
+                %th(width="35%") 例句
             %tbody
               - if @category_id && @category_id > 0
                 - @user.vocabularies.where(category_id: @category_id).each_with_index do |vocabulary, index|
@@ -36,8 +35,6 @@
                       = vocabulary.part_of_speech
                     %td
                       = has_no_category?(vocabulary)
-                    %td
-                      = vocabulary.created_at.to_date
                     %td
                       = vocabulary.example
                     %td
@@ -60,8 +57,6 @@
                     %td
                       = has_no_category?(vocabulary)
                     %td
-                      = vocabulary.created_at.to_date
-                    %td
                       = vocabulary.example
                     %td
                       - if vocabulary.creator == current_user
@@ -78,10 +73,11 @@
             %thead
               %tr
                 %th(width="5%")
-                %th(width="15%") Word
-                %th(width="15%") Part of Speech
-                %th(width="30%") Example
-                %th(width="15%") From
+                %th(width="15%") 單字
+                %th(width="15%") 詞性
+                %th(width="15%") 分類
+                %th(width="35%") 例句
+                %th(width="15%") 來源
             %tbody
               - @user.queue_items.each_with_index do |item, index|
                 %tr
@@ -92,6 +88,8 @@
                   %td
                     = item.vocabulary_part_of_speech
                   %td
+                    = has_no_category?(item.vocabulary)
+                  %td
                     = item.vocabulary_example
                   %td
                     = item.vocabulary_creator.full_name
@@ -99,3 +97,20 @@
                     - if item.user == current_user
                       = link_to item, method: :delete do
                         %i.glyphicon.glyphicon-remove
+              / - else
+              /   - @user.queue_items.collect { |item| item.vocabulary }.each_with_index do |vocabulary, index|
+              /     %tr
+              /       %td
+              /         = index + 1
+              /       %td
+              /         = vocabulary.word
+              /       %td
+              /         = vocabulary.part_of_speech
+              /       %td
+              /         = has_no_category?(vocabulary)
+              /       %td
+              /         = vocabulary.example
+              /       %td
+              /         - if vocabulary.creator == current_user
+              /           = link_to vocabulary, method: :delete do
+              /             %i.glyphicon.glyphicon-trash
