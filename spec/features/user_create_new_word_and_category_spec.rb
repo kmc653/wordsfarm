@@ -10,7 +10,6 @@ feature "User creates new word and category" do
   scenario "create a new word" do
     click_link "Add New Word 新增單字"
     fill_in_new_word
-    page.should have_content "2015-05-27"
     page.should have_content "apple"
     page.should have_content "This is apple."
   end

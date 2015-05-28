@@ -5,7 +5,7 @@ feature 'User makes donation', { js: true, vcr: true } do
   before do
     kevin = Fabricate(:user)
     login(kevin)
-    click_link "捐款"
+    click_link "贊助"
   end
 
   scenario "valid card number" do
