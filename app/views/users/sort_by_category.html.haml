@@ -7,9 +7,9 @@
           = link_to "Follow", relationships_path(leader_id: @user.id), class: 'btn btn-success', method: :post if current_user.can_follow?(@user)
         %ul.nav.nav-tabs
           %li{:role => "presentation"}
-            = link_to "Sorted by created date", sort_by_created_date_path(@user)
+            = link_to "依日期 Sorted by created date", sort_by_created_date_path(@user)
           %li.active{:role => "presentation"}
-            = link_to "Sorted by category", sort_by_category_path(@user)
+            = link_to "依分類 Sorted by category", sort_by_category_path(@user)
         %br
         = form_for @user, url: sort_by_category_path(@user), method: :get do |f|
           = f.select :categories, collect_categories_array.unshift('All'), label: "Choose one of the categories:"
