@@ -11,7 +11,7 @@ describe QueueItemsController do
       ellie = Fabricate(:user)
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: ellie)
-      post :create, user_id: kevin.id, vocabulary_id: word.id
+      post :create, user_id: kevin.id, vocabulary_id: word.id, creator_id: ellie.id
       expect(response).to redirect_to sort_by_created_date_path(ellie)
     end
 
@@ -20,7 +20,7 @@ describe QueueItemsController do
       ellie = Fabricate(:user)
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: ellie)
-      post :create, user_id: kevin.id, vocabulary_id: word.id
+      post :create, user_id: kevin.id, vocabulary_id: word.id, creator_id: ellie.id
       expect(QueueItem.count).to eq(1)
     end
 
@@ -29,7 +29,7 @@ describe QueueItemsController do
       ellie = Fabricate(:user)
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: ellie)
-      post :create, user_id: kevin.id, vocabulary_id: word.id
+      post :create, user_id: kevin.id, vocabulary_id: word.id, creator_id: ellie.id
       expect(QueueItem.first.vocabulary).to eq(word)
     end
 
@@ -38,7 +38,7 @@ describe QueueItemsController do
       ellie = Fabricate(:user)
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: ellie)
-      post :create, user_id: kevin.id, vocabulary_id: word.id
+      post :create, user_id: kevin.id, vocabulary_id: word.id, creator_id: ellie.id
       expect(QueueItem.first.user).to eq(kevin)
     end
 
@@ -48,7 +48,7 @@ describe QueueItemsController do
       set_current_user(kevin)
       word = Fabricate(:vocabulary, creator: ellie)
       Fabricate(:queue_item, user: kevin, vocabulary: word)
-      post :create, user_id: kevin.id, vocabulary_id: word.id
+      post :create, user_id: kevin.id, vocabulary_id: word.id, creator_id: ellie.id
       expect(kevin.queue_items.count).to eq(1)
     end
   end

@@ -30,6 +30,19 @@ Rails.application.routes.draw do
   resources :categories, only: [:new, :create, :show]
   resources :add_searched_words, only: [:show, :create]
   resources :donations, only: [:create]
+  resources :conversations, only: [:index, :show, :destroy] do
+    member do
+      post :reply
+      post :restore
+    end
+    collection do
+      delete :empty_trash
+    end
+  end
+  resources :messages, only: [:new, :create]
+  namespace :admin do
+    resources :users, only:[:index, :destroy]
+  end
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

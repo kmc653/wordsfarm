@@ -17,7 +17,7 @@ class QueueItemsController < ApplicationController
   private
 
   def queue_word(word)
-    QueueItem.create(vocabulary: word, user: current_user) unless current_user_queued_word?(word)
+    QueueItem.create(vocabulary: word, user: current_user, creator: word.creator) unless current_user_queued_word?(word)
   end
 
   def current_user_queued_word?(word)

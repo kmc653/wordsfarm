@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Welcome, you're logged in!"
-      redirect_to sort_by_created_date_path(user)
+      redirect_to current_user.admin? ? admin_users_path : sort_by_created_date_path(user)
     else
       flash[:error] = "Invalid email or password."
       redirect_to login_path

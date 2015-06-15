@@ -1,0 +1,22 @@
+%h3 所有使用者
+
+%table.table
+  %thead
+    %tr
+      %th(width="30%") Name
+      %th(width="30%") register's date
+      %th(width="30%") words
+      %th(width="10%") 
+  %tbody
+    - @users.each_with_index do |user, index|
+      %tr
+        %td
+          = user.full_name
+        %td
+          = user.created_at.to_date
+        %td
+          = user.vocabularies.count
+        %td
+          = link_to admin_user_path(user), method: :delete, data: { confirm: 'Are you sure?' }  do
+            %span.glyphicon.glyphicon-trash
+

@@ -19,6 +19,7 @@
             <li><%= link_to "單字集", sort_by_created_date_path(current_user) %></li>
             <li><%= link_to "朋友", people_path %></li>
             <li><%= link_to "分類", category_path(current_user.id) %></li>
+            <li><%= link_to "訊息", conversations_path %></li>
             <!-- <li><%= link_to "Search", search_path %></li> -->
             <li><%= link_to "贊助", donate_path, method: :get %></li>
             <% else %>

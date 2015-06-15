@@ -1,12 +1,12 @@
 require 'spec_helper'
 
 describe UsersController do
-  describe "GET index" do
-    it "show all users" do
-      get :index
-      expect(assigns(:users)).to eq(User.all)
-    end
-  end
+  # describe "GET index" do
+  #   it "show all users" do
+  #     get :index
+  #     expect(assigns(:users)).to eq(User.all)
+  #   end
+  # end
 
   describe "GET new" do
     it "set @user" do

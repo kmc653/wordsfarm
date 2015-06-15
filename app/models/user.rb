@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   has_many :following_relationships, class_name: 'Relationship', foreign_key: :follower_id
   has_many :leading_relationships, class_name: 'Relationship', foreign_key: :leader_id
 
+  acts_as_messageable
+
   def queued_word?(word)
     queue_items.map(&:vocabulary).include?(word)
   end
@@ -30,5 +32,9 @@ class User < ActiveRecord::Base
 
   def have_vocabularies?
     self.vocabularies.count != 0
+  end
+
+  def mailboxer_email(object)
+    return email
   end
 end
