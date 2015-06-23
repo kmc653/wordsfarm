@@ -1,0 +1,9 @@
+%h3 所有使用者
+
+%ul
+  - @users.each do |user|
+    %li= link_to user.full_name, sort_by_created_date_path(user)
+    %span user.created_at
+    %ul
+      - user.vocabularies.each do |vocabulary|
+        %li= vocabulary.word  

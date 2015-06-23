@@ -1,4 +1,4 @@
-class Admin::UsersController < ApplicationController
+class Admin::UsersController < AdminsController
   def index
     @users = User.all.order('created_at DESC')
   end

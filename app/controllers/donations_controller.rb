@@ -7,7 +7,7 @@ class DonationsController < ApplicationController
 
     charge = StripeWrapper::Charge.create( 
       :source => token, 
-      :description => "Donation from #{@user.email}."
+      :description => "#{@user.email}"
     )
     if charge.successful?
       flash[:success] = "Thank you for your generous support!"

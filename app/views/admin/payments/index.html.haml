@@ -1,0 +1,16 @@
+%h3 All Patronages
+
+%table.table
+  %thead
+    %tr
+      %th(width="30%") Name
+      %th(width="30%") Email
+      %th(width="30%") Amount
+      %th(width="10%") Reference ID
+  %tbody
+    - @payments.each_with_index do |payment, index|
+      %tr
+        %td= payment.user.full_name
+        %td= payment.user.email
+        %td= number_to_currency(payment.amount / 100.0)
+        %td= payment.reference_id
