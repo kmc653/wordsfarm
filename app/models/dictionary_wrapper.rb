@@ -40,5 +40,14 @@ module DictionaryWrapper
     def examples
       entry_def.css("vi")
     end
+
+    def move_examples_away_from_def
+      if entry_def.css("vi")
+        vi = entry_def.css("vi")
+        vi.each do |ex|
+          ex.parent = entry_def
+        end
+      end
+    end
   end
 end

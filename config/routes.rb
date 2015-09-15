@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   get 'people', to: 'relationships#index'
   get 'search', to: 'add_searched_words#search'
   post 'search', to: 'add_searched_words#search'
+  get 'find_added_word', to: 'find_added_words#find_added_word'
+  post 'find_added_word', to: 'find_added_words#find_added_word'
   get 'donate', to: 'donations#new'
   get 'users/:id/sort_by_created_date', to: 'users#sort_by_created_date', as: 'sort_by_created_date'
   get 'users/:id/sort_by_category', to: 'users#sort_by_category', as: 'sort_by_category'
