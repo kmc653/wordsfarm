@@ -1,0 +1,23 @@
+= render 'shared/header', header: "Search result:"
+
+- if @results.present?
+  %table.table
+    %thead
+      %tr
+        %th(width="15%") 單字
+        %th(width="15%") 詞性
+        %th(width="35%") 例句
+        %th(width="15%") 創立者
+    %tbody
+      - @results.each do |result|
+        %tr
+          %td
+            = result.word
+          %td
+            = result.part_of_speech
+          %td
+            = result.example
+          %td
+            = result.creator.full_name
+          %td
+            = link_to "+ My Queue", queue_items_path(vocabulary_id: result.id), method: :post, class: 'btn btn-default' unless current_user.queued_word?(result) if result.creator != current_user

@@ -1,0 +1,19 @@
+machine:
+  ruby:
+    version: 2.1.2
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app wordsfarm
+      - heroku pg:backups capture --app wordsfarm
+      - git push git@heroku.com:wordsfarm.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app wordsfarm
+      - heroku maintenance:off --app wordsfarm
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app wordsfarm-staging
+      - git push git@heroku.com:wordsfarm-staging.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app wordsfarm-staging
+      - heroku maintenance:off --app wordsfarm-staging

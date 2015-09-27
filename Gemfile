@@ -16,6 +16,9 @@ gem 'stripe_event'
 gem 'figaro'
 gem 'nokogiri'
 gem 'mailboxer'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+
 
 group :development, :test do
   gem 'pry'

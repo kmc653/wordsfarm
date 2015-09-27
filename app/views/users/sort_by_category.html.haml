@@ -62,7 +62,7 @@
                       - if vocabulary.creator == current_user
                         = link_to edit_vocabulary_path(vocabulary) do
                           %i.glyphicon.glyphicon-edit 
-                        = link_to vocabulary, method: :delete do
+                        = link_to vocabulary, method: :delete, data: { confirm: "Are you sure?" } do
                           %i.glyphicon.glyphicon-trash
                       - else
                         = link_to "+ My Queue", queue_items_path(vocabulary_id: vocabulary.id), method: :post, class: 'btn btn-default' unless current_user.queued_word?(vocabulary)

@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root to: 'users#index'
+  root to: 'pages#welcome'
   get '/register', to: 'users#new'
   #add token following with register for click invitation mail's link
   get 'register/:token', to: 'users#new_with_invitation_token', as: 'register_with_token'
@@ -15,14 +15,18 @@ Rails.application.routes.draw do
   get 'people', to: 'relationships#index'
   get 'search', to: 'add_searched_words#search'
   post 'search', to: 'add_searched_words#search'
-  get 'find_added_word', to: 'find_added_words#find_added_word'
-  post 'find_added_word', to: 'find_added_words#find_added_word'
+  # get 'find_added_word', to: 'find_added_words#find_added_word'
+  # post 'find_added_word', to: 'find_added_words#find_added_word'
   get 'donate', to: 'donations#new'
   get 'users/:id/sort_by_created_date', to: 'users#sort_by_created_date', as: 'sort_by_created_date'
   get 'users/:id/sort_by_category', to: 'users#sort_by_category', as: 'sort_by_category'
 
   resources :users, only: [:create]
-  resources :vocabularies, only: [:new, :create, :destroy, :edit, :update]
+  resources :vocabularies, only: [:new, :create, :destroy, :edit, :update] do
+    collection do
+      get :search_added_word, to: "vocabularies#search_added_word"
+    end
+  end
   resources :queue_items, only: [:create, :destroy]
   resources :forgot_passwords, only: [:create]
   resources :password_resets, only: [:show, :create]

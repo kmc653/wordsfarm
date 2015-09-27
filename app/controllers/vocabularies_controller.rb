@@ -40,6 +40,14 @@ class VocabulariesController < ApplicationController
     end
   end
 
+  def search_added_word
+    if params[:word].present?
+      @results = Vocabulary.search(params[:word]).records.to_a
+    else
+      flash[:error] = "Couldn't find '#{params[:word]}'. Please try another one."
+    end
+  end
+
   private
 
   def voca_params
