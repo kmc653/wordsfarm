@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby '2.1.2'
 
 gem 'haml-rails'
 gem 'bcrypt-ruby', '3.1.2'
