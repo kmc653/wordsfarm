@@ -1,8 +1,52 @@
-.container-fluid
+.container
   .row
-    %h2
-      Share What you Collect in WordsFarm.
-      = link_to "Sign Up Now!", register_path
-    %p
-      Have an account? Please
-      = link_to "Sign In", login_path
+    .col-lg-12.text-center
+      %h1.section-heading WordsFarms
+      %p.lead.text-center
+        A website that people ara able to check the dictionary and add words to the collections for reviewing easily.
+      %hr.primary
+
+.container
+  .row
+    .col-md-4.text-center
+      #blocks.service-box
+        %h3 Dictionary
+        %p.text-muted Users are able to check words via Merriam-Webster dictionary.
+
+    .col-md-4.text-center
+      #blocks.service-box
+        %h3 Collection
+        %p.text-muted Users are able to add words in their own collections.
+
+    .col-md-4.text-center
+      #blocks.service-box
+        %h3 Searching
+        %p.text-muted Searching feature enable users to search words which already stored in the website.
+
+%br
+%br
+
+.container
+  .row
+    .col-md-4.text-center
+      #blocks.service-box
+        %h3 Cooperation
+        %p.text-muted Users are able to collect words together and learn together.
+    .col-md-4.text-center
+      #blocks.service-box
+        %h3 Communication
+        %p.text-muted People are able to send messages to others users.
+    .col-md-4.text-center
+      #blocks.service-box
+        %h3 Classification
+        %p.text-muted Classification enable people to classify their collections.
+%br
+.container
+  .row
+    .text-center
+      %h3
+        Ready to Join in WordsFarm?
+        = link_to "Sign Up Now!", register_path
+      %p
+        Have an account? Please
+        = link_to "Sign In", login_path
