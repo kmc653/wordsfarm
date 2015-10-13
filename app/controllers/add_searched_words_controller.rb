@@ -1,6 +1,6 @@
 class AddSearchedWordsController < ApplicationController
   def search
-    if params[:word]
+    if params[:word].present?
       @word = params[:word]
       respond = DictionaryWrapper::Search.create(@word)
       
@@ -8,7 +8,7 @@ class AddSearchedWordsController < ApplicationController
         flash[:error] = "Couldn't find '#{@word}'. Please try another one."
         redirect_to search_path
       else
-        @entry_def = respond.entry_def # get the definition of the word
+        @entry_def = respond.entry_def     # get the definition of the word
         @pos = respond.part_of_speech      # get the part of speech
         @degree = respond.degree_of_word   # get the degree of word
         @vi = respond.examples             # get the examples

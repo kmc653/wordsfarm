@@ -6,5 +6,4 @@ class CreateVocabularies < ActiveRecord::Migration
       t.string :example
       t.timestamps
     end
-  end
 end

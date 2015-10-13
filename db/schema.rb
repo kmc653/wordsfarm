@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150623021056) do
+ActiveRecord::Schema.define(version: 20151013055542) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -117,6 +117,8 @@ ActiveRecord::Schema.define(version: 20150623021056) do
     t.boolean  "admin"
   end
 
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+
   create_table "vocabularies", force: true do |t|
     t.string   "word"
     t.string   "part_of_speech"
@@ -126,6 +128,9 @@ ActiveRecord::Schema.define(version: 20150623021056) do
     t.integer  "user_id"
     t.integer  "category_id"
   end
+
+  add_index "vocabularies", ["user_id"], name: "index_vocabularies_on_user_id", using: :btree
+  add_index "vocabularies", ["word"], name: "index_vocabularies_on_word", unique: true, using: :btree
 
   add_foreign_key "mailboxer_conversation_opt_outs", "mailboxer_conversations", name: "mb_opt_outs_on_conversations_id", column: "conversation_id"
 
